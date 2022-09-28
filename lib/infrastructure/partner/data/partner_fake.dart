@@ -5,10 +5,10 @@ final PARTNER_FAKE_DATA = [
   {
     "id": Uuid().v4(),
     "name": "Toko Lancar Sentosa",
-    "address": "Jl. Lancar II, No. 8 RT 7 RW.7, Sumur Batu, Kemayoran",
+    "address": "Jl. Utan Panjang 3, RW.7 Kemayoran",
     "phoneNumber": "0987654321",
-    "latitude": -6.166651308386887,
-    "longitude": 106.87185608107025,
+    "latitude": -6.169153111693811,
+    "longitude": 106.85337827930438,
     "services": [1, 2, 3]
   },
   {
@@ -43,9 +43,9 @@ final PARTNER_FAKE_DATA = [
   {
     "id": Uuid().v4(),
     "name": "Toko E",
-    "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
+    "address": "Jl. cempaka Putih tengah VI RW.7, East Cempaka Putih",
     "phoneNumber": "0987654321",
-    "latitude": -6.174604041144962,
+    "latitude": -6.175139428313849,
     "longitude": 106.87217960189032,
     "services": [1, 2, 3]
   },
@@ -61,37 +61,29 @@ final PARTNER_FAKE_DATA = [
   {
     "id": Uuid().v4(),
     "name": "Toko G",
-    "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
+    "address":
+        "Jl. Trampil IV 6-8 RT.10/RW.2, Klp. Gading Barat. Jakarta Utara",
     "phoneNumber": "0987654321",
-    "latitude": -6.151844243088841,
-    "longitude": 106.89280148332983,
-    "services": [1, 2, 3]
-  },
-  {
-    "id": Uuid().v4(),
-    "name": "Family Petshop",
-    "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
-    "phoneNumber": "0987654321",
-    "latitude": -6.150660198931381,
-    "longitude": 106.89227040594785,
+    "latitude": -6.164624621011507,
+    "longitude": 106.88254200175989,
     "services": [1, 2, 3]
   },
   {
     "id": Uuid().v4(),
     "name": "Toko H",
-    "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
+    "address": "Jl. Pulau Panjang RT.2/RW.9, Klp. Gading Barat Jakarta Utara",
     "phoneNumber": "0987654321",
-    "latitude": -6.1476787427306645,
-    "longitude": 106.89159985369785,
+    "latitude": -6.157806674828935,
+    "longitude": 106.8869542576272,
     "services": [1, 2, 3]
   },
   {
     "id": Uuid().v4(),
     "name": "Toko I",
-    "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
+    "address": "Jl. Pulo Besar I 8-10 RT.3/RW.11, Sunter Jaya, Jakarta Utara",
     "phoneNumber": "0987654321",
-    "latitude": -6.150153512562843,
-    "longitude": 106.89155693835384,
+    "latitude": -6.155193886311953,
+    "longitude": 106.88469130525397,
     "services": [1, 2, 3]
-  }
+  },
 ];

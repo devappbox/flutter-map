@@ -88,7 +88,6 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
                   debugPrint("S $_latlongOnMove");
                 },
                 onCameraIdle: () {
-                  debugPrint("OKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK");
                   _latlong = _latlongOnMove;
                   debugPrint("SSS $_latlong");
                 },
@@ -105,7 +104,7 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
                 onMapCreated: (controller) async {
                   _googleMapController = controller;
                   _controller.complete(controller);
-                  await Future.delayed(Duration(milliseconds: 100));
+                  //await Future.delayed(Duration(milliseconds: 100));
                   _markers?.add(Marker(
                       onTap: () {},
                       //icon: BitmapDescriptor.hueAzure.round(),
@@ -130,6 +129,10 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
                         position: LatLng(e.latitude, e.longitude),
                         infoWindow: InfoWindow(title: e.name)));
                   });
+
+                  debugPrint("PARTNER MAP WIDGET ONMAPCREATED");
+
+                  await Future.delayed(Duration(milliseconds: 100));
                   setState(() {});
                   _pad = 200;
 
