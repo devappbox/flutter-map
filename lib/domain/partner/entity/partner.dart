@@ -1,4 +1,4 @@
-import 'package:flutter_map/domain/partner/core/entity.dart';
+import 'package:flutter_map/domain/core/entity.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'partner.freezed.dart';

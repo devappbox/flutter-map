@@ -1,7 +1,7 @@
 import 'package:uuid/uuid.dart';
 
 // ignore: non_constant_identifier_names
-final PRODUCT_FAKE_DATA_00001 = [
+final PRODUCT_FAKE_DATA__00002 = [
   {
     "id": "00001-W233B",
     "partnerId": "00001",
