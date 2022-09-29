@@ -30,6 +30,8 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
 
   bool _expanded = false;
 
+  bool _routeLocal = false;
+
   @override
   void initState() {
     super.initState();
@@ -41,8 +43,8 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
 
   @override
   void dispose() {
-    _autoScrollController.dispose();
     super.dispose();
+    _autoScrollController.dispose();
   }
 
   @override
@@ -64,8 +66,6 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
                     int? index = r?.indexWhere((e) => e.id == state.markerId);
                     if (index != null) {
                       if (index != -1) {
-                        debugPrint(
-                            "PARTNER SLIDING PANEL WIDGET AUTO SCROLL INDEX");
                         _autoScrollController.scrollToIndex(index,
                             preferPosition: AutoScrollPosition.begin);
                       }
@@ -80,6 +80,12 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
           _height = 700.0;
           _width = 350.0;
           _expanded = true;
+          _routeLocal = true;
+          ModalRoute.of(context)
+              ?.addLocalHistoryEntry(LocalHistoryEntry(onRemove: () {
+            _routeLocal = false;
+            _panelController.close();
+          }));
         }),
         // context
         //     .read<PartnerSlidingPanelBloc>()
@@ -88,6 +94,10 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
           _height = 355.0;
           _width = 350.0;
           _expanded = false;
+          if (_routeLocal == true) {
+            _routeLocal = false;
+            Navigator.of(context).pop();
+          }
         }),
         //panelSnapping: true,
         //snapPoint: 0.5,
@@ -173,41 +183,5 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
         body: PartnerMapWidget(),
       ),
     );
-  }
-}
-
-class TrianglePainter extends CustomPainter {
-  final Color strokeColor;
-  final PaintingStyle paintingStyle;
-  final double strokeWidth;
-
-  TrianglePainter(
-      {this.strokeColor = Colors.black,
-      this.strokeWidth = 3,
-      this.paintingStyle = PaintingStyle.stroke});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    Paint paint = Paint()
-      ..color = strokeColor
-      ..strokeWidth = strokeWidth
-      ..style = paintingStyle;
-
-    canvas.drawPath(getTrianglePath(size.width, size.height), paint);
-  }
-
-  Path getTrianglePath(double x, double y) {
-    return Path()
-      ..moveTo(0, y)
-      ..lineTo(x / 2, 0)
-      ..lineTo(x, y)
-      ..lineTo(0, y);
-  }
-
-  @override
-  bool shouldRepaint(TrianglePainter oldDelegate) {
-    return oldDelegate.strokeColor != strokeColor ||
-        oldDelegate.paintingStyle != paintingStyle ||
-        oldDelegate.strokeWidth != strokeWidth;
   }
 }

@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_map/domain/partner/entity/partner.dart';
 import 'package:flutter_map/presentation/partner/list/bloc/partner_list_bloc.dart';
 import 'package:flutter_map/presentation/partner/sliding_panel/bloc/partner_sliding_panel_bloc.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
@@ -17,8 +18,8 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
   late GoogleMapController _googleMapController;
   Completer<GoogleMapController> _controller = Completer();
   double _pad = 0.0;
-  late LatLng _latlong;
-  late LatLng _latlongOnMove;
+  LatLng _latlong = LatLng(-6.1651366269863335, 106.87359415250097);
+  LatLng _latlongOnMove = LatLng(-6.1651366269863335, 106.87359415250097);
 
   Set<Marker>? _markers = <Marker>{};
   BitmapDescriptor? myMarker;
@@ -26,8 +27,8 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
   @override
   void initState() {
     super.initState();
-    _latlong = LatLng(-6.1651366269863335, 106.87359415250097);
-    _latlongOnMove = LatLng(-6.1651366269863335, 106.87359415250097);
+    // _latlong = LatLng(-6.1651366269863335, 106.87359415250097);
+    // _latlongOnMove = LatLng(-6.1651366269863335, 106.87359415250097);
   }
 
   @override
@@ -35,6 +36,48 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
     _googleMapController.dispose();
 
     super.dispose();
+  }
+
+  _onMapCreated(List<Partner>? data) async {
+    _markers?.add(Marker(
+        onTap: () {},
+        //icon: BitmapDescriptor.hueAzure.round(),
+        markerId: MarkerId('myId'),
+        position: LatLng(-6.1651366269863335, 106.87359415250097),
+        infoWindow: InfoWindow(title: "I Am Here/My Location")));
+    var _f = data == null ? 0 : data.length;
+
+    for (var f = 0; f < _f; f++) {
+      var e = data![f];
+
+      myMarker = await BitmapDescriptor.fromAssetImage(
+        ImageConfiguration(size: Size(0.05, 0.05)),
+        "assets/images/winn1.jpg",
+      );
+
+      _markers?.add(Marker(
+          onTap: () {
+            _latlong = LatLng(e.latitude, e.longitude);
+            context.read<PartnerSlidingPanelBloc>()
+              ..add(TapMarkerPartnerSlidingPanelEvent(markerId: e.id));
+          },
+          icon: myMarker!,
+          markerId: MarkerId(e.id),
+          position: LatLng(e.latitude, e.longitude),
+          infoWindow: InfoWindow(title: e.name)));
+
+      if (f == _f - 1) {
+        await Future.delayed(Duration(milliseconds: 100));
+        setState(() {});
+        _pad = 200;
+
+        await Future.delayed(Duration(milliseconds: 100));
+        _googleMapController.animateCamera(CameraUpdate.newCameraPosition(
+            CameraPosition(
+                target: LatLng(-6.1651366269863335, 106.87359415250097),
+                zoom: 14)));
+      }
+    }
   }
 
   @override
@@ -45,7 +88,6 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
             listenWhen: (p, c) {
           return p.tap != c.tap;
         }, listener: (context, state) {
-          debugPrint("$_latlong");
           _latlong = LatLng(state.latitude!, state.longitude!);
           _googleMapController.animateCamera(CameraUpdate.newCameraPosition(
               CameraPosition(
@@ -72,7 +114,58 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
           // await Future.delayed(Duration(milliseconds: 50));
           // _googleMapController.animateCamera(CameraUpdate.newCameraPosition(
           //     CameraPosition(target: _latlong, zoom: zoom)));
-        })
+        }),
+        BlocListener<PartnerListBloc, PartnerListState>(listenWhen: (p, c) {
+          return p.isSearch != c.isSearch;
+        }, listener: (context, state) {
+          state.status.maybeWhen(
+            orElse: () {},
+            success: (data) async {
+              if (data != null) {
+                _markers = {};
+                _markers?.add(Marker(
+                    onTap: () {},
+                    //icon: BitmapDescriptor.hueAzure.round(),
+                    markerId: MarkerId('myId'),
+                    position: LatLng(-6.1651366269863335, 106.87359415250097),
+                    infoWindow: InfoWindow(title: "I Am Here/My Location")));
+                var _f = data.length;
+
+                for (var f = 0; f < _f; f++) {
+                  var e = data[f];
+
+                  myMarker = await BitmapDescriptor.fromAssetImage(
+                    ImageConfiguration(size: Size(0.05, 0.05)),
+                    "assets/images/winn1.jpg",
+                  );
+
+                  _markers?.add(Marker(
+                      onTap: () {
+                        _latlong = LatLng(e.latitude, e.longitude);
+                        context.read<PartnerSlidingPanelBloc>()
+                          ..add(TapMarkerPartnerSlidingPanelEvent(
+                              markerId: e.id));
+                      },
+                      icon: myMarker!,
+                      markerId: MarkerId(e.id),
+                      position: LatLng(e.latitude, e.longitude),
+                      infoWindow: InfoWindow(title: e.name)));
+
+                  if (f == _f - 1) {
+                    setState(() {});
+
+                    await Future.delayed(Duration(milliseconds: 100));
+                    _googleMapController.animateCamera(
+                        CameraUpdate.newCameraPosition(CameraPosition(
+                            target:
+                                LatLng(-6.1651366269863335, 106.87359415250097),
+                            zoom: 14)));
+                  }
+                }
+              }
+            },
+          );
+        }),
       ],
       child: BlocBuilder<PartnerListBloc, PartnerListState>(
           builder: ((context, state) {
@@ -85,11 +178,9 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
                 onCameraMove: (position) {
                   _latlongOnMove = LatLng(
                       position.target.latitude, position.target.longitude);
-                  debugPrint("S $_latlongOnMove");
                 },
                 onCameraIdle: () {
                   _latlong = _latlongOnMove;
-                  debugPrint("SSS $_latlong");
                 },
                 buildingsEnabled: false,
                 rotateGesturesEnabled: false,
@@ -105,92 +196,52 @@ class _PartnerMapWidgetState extends State<PartnerMapWidget> {
                   _googleMapController = controller;
                   _controller.complete(controller);
                   //await Future.delayed(Duration(milliseconds: 100));
-                  _markers?.add(Marker(
-                      onTap: () {},
-                      //icon: BitmapDescriptor.hueAzure.round(),
-                      markerId: MarkerId('myId'),
-                      position: LatLng(-6.1651366269863335, 106.87359415250097),
-                      infoWindow: InfoWindow(title: "I Am Here/My Location")));
-
-                  data?.forEach((e) async {
-                    myMarker = await BitmapDescriptor.fromAssetImage(
-                      ImageConfiguration(size: Size(0.05, 0.05)),
-                      "assets/images/winn1.jpg",
-                    );
-                    _markers?.add(Marker(
-                        onTap: () {
-                          _latlong = LatLng(e.latitude, e.longitude);
-                          context.read<PartnerSlidingPanelBloc>()
-                            ..add(TapMarkerPartnerSlidingPanelEvent(
-                                markerId: e.id));
-                        },
-                        icon: myMarker!,
-                        markerId: MarkerId(e.id),
-                        position: LatLng(e.latitude, e.longitude),
-                        infoWindow: InfoWindow(title: e.name)));
-                  });
-
-                  debugPrint("PARTNER MAP WIDGET ONMAPCREATED");
-
-                  await Future.delayed(Duration(milliseconds: 100));
-                  setState(() {});
-                  _pad = 200;
-
-                  await Future.delayed(Duration(milliseconds: 100));
-                  _googleMapController.animateCamera(
-                      CameraUpdate.newCameraPosition(CameraPosition(
-                          target:
-                              LatLng(-6.1651366269863335, 106.87359415250097),
-                          zoom: 14)));
+                  _onMapCreated(data);
                 },
               );
             },
-            loading: () => GoogleMap(
-                  onCameraMove: (position) {
-                    _latlongOnMove = LatLng(
-                        position.target.latitude, position.target.longitude);
-                    debugPrint("S $_latlongOnMove");
-                  },
-                  onCameraIdle: () {
-                    debugPrint("LLLLLLLLLLLLLLLLLLLLLLLLLLLLL");
-                    _latlong = _latlongOnMove;
-                    debugPrint("SSS $_latlong");
-                  },
-                  buildingsEnabled: false,
-                  rotateGesturesEnabled: false,
-                  //myLocationEnabled: true,
-                  //myLocationButtonEnabled: true,
-                  initialCameraPosition: CameraPosition(
-                    target: LatLng(-6.1651366269863335, 106.87359415250097),
-                    zoom: 14,
-                  ),
-                  //markers: Set<Marker>.of(_markers),
-                  padding: EdgeInsets.only(bottom: _pad),
-                  onMapCreated: (controller) async {
-                    _googleMapController = controller;
-                    _controller.complete(controller);
-                    await Future.delayed(Duration(milliseconds: 100));
-                    // setState(() {});
-                    // _pad = 200;
+            loading: () => Container()
+            // GoogleMap(
+            //       onCameraMove: (position) {
+            //         _latlongOnMove = LatLng(
+            //             position.target.latitude, position.target.longitude);
+            //       },
+            //       onCameraIdle: () {
+            //         _latlong = _latlongOnMove;
+            //       },
+            //       buildingsEnabled: false,
+            //       rotateGesturesEnabled: false,
+            //       //myLocationEnabled: true,
+            //       //myLocationButtonEnabled: true,
+            //       initialCameraPosition: CameraPosition(
+            //         target: LatLng(-6.1651366269863335, 106.87359415250097),
+            //         zoom: 14,
+            //       ),
+            //       //markers: Set<Marker>.of(_markers),
+            //       padding: EdgeInsets.only(bottom: _pad),
+            //       onMapCreated: (controller) async {
+            //         _googleMapController = controller;
+            //         _controller.complete(controller);
+            //         await Future.delayed(Duration(milliseconds: 100));
+            //         // setState(() {});
+            //         // _pad = 200;
 
-                    // await Future.delayed(Duration(milliseconds: 100));
-                    // _googleMapController.animateCamera(
-                    //     CameraUpdate.newCameraPosition(CameraPosition(
-                    //         target:
-                    //             LatLng(-6.1651366269863335, 106.87359415250097),
-                    //         zoom: 14)));
-                  },
-                ),
+            //         // await Future.delayed(Duration(milliseconds: 100));
+            //         // _googleMapController.animateCamera(
+            //         //     CameraUpdate.newCameraPosition(CameraPosition(
+            //         //         target:
+            //         //             LatLng(-6.1651366269863335, 106.87359415250097),
+            //         //         zoom: 14)));
+            //       },
+            //     ),
+            ,
             failure: (f) => GoogleMap(
                   onCameraMove: (position) {
                     _latlongOnMove = LatLng(
                         position.target.latitude, position.target.longitude);
-                    debugPrint("S $_latlongOnMove");
                   },
                   onCameraIdle: () {
-                    debugPrint("FFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
                     _latlong = _latlongOnMove;
-                    debugPrint("SSS $_latlong");
                   },
                   buildingsEnabled: false,
                   rotateGesturesEnabled: false,

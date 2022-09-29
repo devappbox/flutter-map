@@ -66,7 +66,8 @@ class PartnerListBloc extends Bloc<PartnerListEvent, PartnerListState> {
                         1000)));
 
             emit(state.copyWith(
-                status: StateStatus.success(data: r.isEmpty ? null : r)));
+                status: StateStatus.success(data: r.isEmpty ? null : r),
+                isSearch: !state.isSearch));
           },
           orElse: () => null);
     } else {
@@ -94,7 +95,8 @@ class PartnerListBloc extends Bloc<PartnerListEvent, PartnerListState> {
                         1000)));
 
             emit(state.copyWith(
-                status: StateStatus.success(data: r.isEmpty ? null : r)));
+                status: StateStatus.success(data: r.isEmpty ? null : r),
+                isSearch: !state.isSearch));
           },
           orElse: () => null);
     }

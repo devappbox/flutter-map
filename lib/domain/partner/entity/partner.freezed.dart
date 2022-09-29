@@ -27,6 +27,8 @@ mixin _$Partner {
   double get latitude => throw _privateConstructorUsedError;
   double get longitude => throw _privateConstructorUsedError;
   List<int> get services => throw _privateConstructorUsedError;
+  String get openAt => throw _privateConstructorUsedError;
+  String get closeAt => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,7 +46,9 @@ abstract class $PartnerCopyWith<$Res> {
       String phoneNumber,
       double latitude,
       double longitude,
-      List<int> services});
+      List<int> services,
+      String openAt,
+      String closeAt});
 }
 
 /// @nodoc
@@ -64,6 +68,8 @@ class _$PartnerCopyWithImpl<$Res> implements $PartnerCopyWith<$Res> {
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? services = freezed,
+    Object? openAt = freezed,
+    Object? closeAt = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -94,6 +100,14 @@ class _$PartnerCopyWithImpl<$Res> implements $PartnerCopyWith<$Res> {
           ? _value.services
           : services // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      openAt: openAt == freezed
+          ? _value.openAt
+          : openAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      closeAt: closeAt == freezed
+          ? _value.closeAt
+          : closeAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -111,7 +125,9 @@ abstract class _$$_PartnerCopyWith<$Res> implements $PartnerCopyWith<$Res> {
       String phoneNumber,
       double latitude,
       double longitude,
-      List<int> services});
+      List<int> services,
+      String openAt,
+      String closeAt});
 }
 
 /// @nodoc
@@ -132,6 +148,8 @@ class __$$_PartnerCopyWithImpl<$Res> extends _$PartnerCopyWithImpl<$Res>
     Object? latitude = freezed,
     Object? longitude = freezed,
     Object? services = freezed,
+    Object? openAt = freezed,
+    Object? closeAt = freezed,
   }) {
     return _then(_$_Partner(
       id: id == freezed
@@ -162,6 +180,14 @@ class __$$_PartnerCopyWithImpl<$Res> extends _$PartnerCopyWithImpl<$Res>
           ? _value._services
           : services // ignore: cast_nullable_to_non_nullable
               as List<int>,
+      openAt: openAt == freezed
+          ? _value.openAt
+          : openAt // ignore: cast_nullable_to_non_nullable
+              as String,
+      closeAt: closeAt == freezed
+          ? _value.closeAt
+          : closeAt // ignore: cast_nullable_to_non_nullable
+              as String,
     ));
   }
 }
@@ -176,7 +202,9 @@ class _$_Partner extends _Partner {
       required this.phoneNumber,
       required this.latitude,
       required this.longitude,
-      required final List<int> services})
+      required final List<int> services,
+      required this.openAt,
+      required this.closeAt})
       : _services = services,
         super._();
 
@@ -203,8 +231,13 @@ class _$_Partner extends _Partner {
   }
 
   @override
+  final String openAt;
+  @override
+  final String closeAt;
+
+  @override
   String toString() {
-    return 'Partner(id: $id, name: $name, address: $address, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, services: $services)';
+    return 'Partner(id: $id, name: $name, address: $address, phoneNumber: $phoneNumber, latitude: $latitude, longitude: $longitude, services: $services, openAt: $openAt, closeAt: $closeAt)';
   }
 
   @override
@@ -219,7 +252,9 @@ class _$_Partner extends _Partner {
                 .equals(other.phoneNumber, phoneNumber) &&
             const DeepCollectionEquality().equals(other.latitude, latitude) &&
             const DeepCollectionEquality().equals(other.longitude, longitude) &&
-            const DeepCollectionEquality().equals(other._services, _services));
+            const DeepCollectionEquality().equals(other._services, _services) &&
+            const DeepCollectionEquality().equals(other.openAt, openAt) &&
+            const DeepCollectionEquality().equals(other.closeAt, closeAt));
   }
 
   @JsonKey(ignore: true)
@@ -232,7 +267,9 @@ class _$_Partner extends _Partner {
       const DeepCollectionEquality().hash(phoneNumber),
       const DeepCollectionEquality().hash(latitude),
       const DeepCollectionEquality().hash(longitude),
-      const DeepCollectionEquality().hash(_services));
+      const DeepCollectionEquality().hash(_services),
+      const DeepCollectionEquality().hash(openAt),
+      const DeepCollectionEquality().hash(closeAt));
 
   @JsonKey(ignore: true)
   @override
@@ -255,7 +292,9 @@ abstract class _Partner extends Partner {
       required final String phoneNumber,
       required final double latitude,
       required final double longitude,
-      required final List<int> services}) = _$_Partner;
+      required final List<int> services,
+      required final String openAt,
+      required final String closeAt}) = _$_Partner;
   const _Partner._() : super._();
 
   factory _Partner.fromJson(Map<String, dynamic> json) = _$_Partner.fromJson;
@@ -274,6 +313,10 @@ abstract class _Partner extends Partner {
   double get longitude;
   @override
   List<int> get services;
+  @override
+  String get openAt;
+  @override
+  String get closeAt;
   @override
   @JsonKey(ignore: true)
   _$$_PartnerCopyWith<_$_Partner> get copyWith =>

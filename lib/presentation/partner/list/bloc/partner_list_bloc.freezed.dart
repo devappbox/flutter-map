@@ -18,6 +18,7 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$PartnerListState {
   StateStatus<FailureExceptions, List<Partner>?> get status =>
       throw _privateConstructorUsedError;
+  bool get isSearch => throw _privateConstructorUsedError;
 
   @JsonKey(ignore: true)
   $PartnerListStateCopyWith<PartnerListState> get copyWith =>
@@ -29,7 +30,8 @@ abstract class $PartnerListStateCopyWith<$Res> {
   factory $PartnerListStateCopyWith(
           PartnerListState value, $Res Function(PartnerListState) then) =
       _$PartnerListStateCopyWithImpl<$Res>;
-  $Res call({StateStatus<FailureExceptions, List<Partner>?> status});
+  $Res call(
+      {StateStatus<FailureExceptions, List<Partner>?> status, bool isSearch});
 
   $StateStatusCopyWith<FailureExceptions, List<Partner>?, $Res> get status;
 }
@@ -46,12 +48,17 @@ class _$PartnerListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
+    Object? isSearch = freezed,
   }) {
     return _then(_value.copyWith(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StateStatus<FailureExceptions, List<Partner>?>,
+      isSearch: isSearch == freezed
+          ? _value.isSearch
+          : isSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 
@@ -71,7 +78,8 @@ abstract class _$$_PartnerListStateCopyWith<$Res>
           _$_PartnerListState value, $Res Function(_$_PartnerListState) then) =
       __$$_PartnerListStateCopyWithImpl<$Res>;
   @override
-  $Res call({StateStatus<FailureExceptions, List<Partner>?> status});
+  $Res call(
+      {StateStatus<FailureExceptions, List<Partner>?> status, bool isSearch});
 
   @override
   $StateStatusCopyWith<FailureExceptions, List<Partner>?, $Res> get status;
@@ -91,12 +99,17 @@ class __$$_PartnerListStateCopyWithImpl<$Res>
   @override
   $Res call({
     Object? status = freezed,
+    Object? isSearch = freezed,
   }) {
     return _then(_$_PartnerListState(
       status: status == freezed
           ? _value.status
           : status // ignore: cast_nullable_to_non_nullable
               as StateStatus<FailureExceptions, List<Partner>?>,
+      isSearch: isSearch == freezed
+          ? _value.isSearch
+          : isSearch // ignore: cast_nullable_to_non_nullable
+              as bool,
     ));
   }
 }
@@ -104,14 +117,16 @@ class __$$_PartnerListStateCopyWithImpl<$Res>
 /// @nodoc
 
 class _$_PartnerListState implements _PartnerListState {
-  const _$_PartnerListState({required this.status});
+  const _$_PartnerListState({required this.status, required this.isSearch});
 
   @override
   final StateStatus<FailureExceptions, List<Partner>?> status;
+  @override
+  final bool isSearch;
 
   @override
   String toString() {
-    return 'PartnerListState(status: $status)';
+    return 'PartnerListState(status: $status, isSearch: $isSearch)';
   }
 
   @override
@@ -119,12 +134,15 @@ class _$_PartnerListState implements _PartnerListState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_PartnerListState &&
-            const DeepCollectionEquality().equals(other.status, status));
+            const DeepCollectionEquality().equals(other.status, status) &&
+            const DeepCollectionEquality().equals(other.isSearch, isSearch));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(status));
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(status),
+      const DeepCollectionEquality().hash(isSearch));
 
   @JsonKey(ignore: true)
   @override
@@ -134,11 +152,13 @@ class _$_PartnerListState implements _PartnerListState {
 
 abstract class _PartnerListState implements PartnerListState {
   const factory _PartnerListState(
-      {required final StateStatus<FailureExceptions, List<Partner>?>
-          status}) = _$_PartnerListState;
+      {required final StateStatus<FailureExceptions, List<Partner>?> status,
+      required final bool isSearch}) = _$_PartnerListState;
 
   @override
   StateStatus<FailureExceptions, List<Partner>?> get status;
+  @override
+  bool get isSearch;
   @override
   @JsonKey(ignore: true)
   _$$_PartnerListStateCopyWith<_$_PartnerListState> get copyWith =>

@@ -1,9 +1,12 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/domain/partner/entity/partner.dart';
 import 'package:flutter_map/presentation/partner/sliding_panel/bloc/partner_sliding_panel_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PartnerSlidingPanelListCard extends StatefulWidget {
   final AutoScrollController autoScrollController;
@@ -23,6 +26,46 @@ class PartnerSlidingPanelListCard extends StatefulWidget {
 
 class _PartnerSlidingPanelListCardState
     extends State<PartnerSlidingPanelListCard> {
+  _openwhatsapp(String n) async {
+    var whatsapp = n;
+    var whatsappURl_android =
+        "whatsapp://send?phone=" + whatsapp + "&text=hello";
+
+    var whatappURL_ios = "https://wa.me/$whatsapp?text=${Uri.parse("hello")}";
+    if (Platform.isIOS) {
+      // for iOS phone only
+      // if (await canLaunchUrl(Uri.parse(whatappURL_ios))) {
+      await launchUrl(Uri.parse(whatappURL_ios));
+      //} else {
+      //ScaffoldMessenger.of(context)
+      //  .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      //}
+    } else {
+      // android , web
+      // if (await canLaunchUrl(Uri.parse(whatsappURl_android))) {
+      await launchUrl(Uri.parse(whatsappURl_android));
+      // } else {
+      // ScaffoldMessenger.of(context)
+      //     .showSnackBar(SnackBar(content: new Text("whatsapp no installed")));
+      //}
+    }
+  }
+
+  _openEmail() async {
+    String email = Uri.encodeComponent("winnGasMerchant@gmail.com");
+    String subject = Uri.encodeComponent("Hello Flutter");
+    String body = Uri.encodeComponent("Hi! I'm Flutter Developer");
+    print(subject); //output: Hello%20Flutter
+    Uri mail = Uri.parse("mailto:$email?subject=$subject&body=$body");
+    if (await launchUrl(mail)) {
+      //email app opened
+    } else {
+      //email app is not opened
+    }
+  }
+
+  _openPhoneCall(String n) async {}
+
   @override
   Widget build(BuildContext context) {
     final me = -6.1651366269863335;
@@ -72,21 +115,44 @@ class _PartnerSlidingPanelListCardState
                       //Spacer(),
                       Row(
                         children: [
-                          Image.asset(
-                            "assets/images/image.jpg",
-                            gaplessPlayback: true,
-                            //fit: BoxFit.cover,
-                            width: 30,
-                            height: 30,
+                          GestureDetector(
+                            onTap: () =>
+                                _openwhatsapp(widget.partner.phoneNumber),
+                            child: Image.asset(
+                              "assets/images/wa.png",
+                              gaplessPlayback: true,
+                              //fit: BoxFit.cover,
+                              width: 35,
+                              height: 35,
+                            ),
                           ),
                           SizedBox(
-                            width: 5.0,
+                            width: 15.0,
                           ),
-                          Icon(Icons.home_outlined),
+                          GestureDetector(
+                            onTap: () => launchUrl(Uri.parse(
+                                "tel:/" + widget.partner.phoneNumber)),
+                            child: Image.asset(
+                              "assets/images/phone1.png",
+                              gaplessPlayback: true,
+                              //fit: BoxFit.cover,
+                              width: 17,
+                              height: 17,
+                            ),
+                          ),
                           SizedBox(
-                            width: 5.0,
+                            width: 15.0,
                           ),
-                          Icon(Icons.home_outlined)
+                          GestureDetector(
+                            onTap: () => _openEmail(),
+                            child: Image.asset(
+                              "assets/images/email2.png",
+                              gaplessPlayback: true,
+                              //fit: BoxFit.cover,
+                              width: 25,
+                              height: 25,
+                            ),
+                          ),
                         ],
                       )
                     ],
@@ -160,7 +226,7 @@ class _PartnerSlidingPanelListCardState
                           Wrap(
                             children: [
                               Text(
-                                "09.00",
+                                widget.partner.openAt,
                                 style: TextStyle(
                                     fontSize: 13.0, color: Colors.black),
                               ),
@@ -176,7 +242,7 @@ class _PartnerSlidingPanelListCardState
                                 width: 10.0,
                               ),
                               Text(
-                                "17.00",
+                                widget.partner.closeAt,
                                 style: TextStyle(
                                     fontSize: 13.0, color: Colors.black),
                               ),
@@ -193,21 +259,8 @@ class _PartnerSlidingPanelListCardState
                             ),
                             textStyle: const TextStyle(fontSize: 15.0)),
                         onPressed: () {},
-                        child: const Text('Book'),
+                        child: const Text('Detail'),
                       ),
-                      SizedBox(
-                        width: 5.0,
-                      ),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            primary: Color.fromARGB(255, 181, 171, 139),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                            ),
-                            textStyle: const TextStyle(fontSize: 15.0)),
-                        onPressed: () {},
-                        child: Icon(Icons.shopping_bag_outlined),
-                      )
                     ],
                   ),
                 ),

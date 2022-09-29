@@ -15,6 +15,8 @@ _$_Partner _$$_PartnerFromJson(Map<String, dynamic> json) => _$_Partner(
       longitude: (json['longitude'] as num).toDouble(),
       services:
           (json['services'] as List<dynamic>).map((e) => e as int).toList(),
+      openAt: json['openAt'] as String,
+      closeAt: json['closeAt'] as String,
     );
 
 Map<String, dynamic> _$$_PartnerToJson(_$_Partner instance) =>
@@ -26,4 +28,6 @@ Map<String, dynamic> _$$_PartnerToJson(_$_Partner instance) =>
       'latitude': instance.latitude,
       'longitude': instance.longitude,
       'services': instance.services,
+      'openAt': instance.openAt,
+      'closeAt': instance.closeAt,
     };

@@ -15,6 +15,8 @@ class Partner with _$Partner implements IEntity {
     required double latitude,
     required double longitude,
     required List<int> services,
+    required String openAt,
+    required String closeAt,
   }) = _Partner;
 
   factory Partner.fromJson(Map<String, dynamic> json) =>

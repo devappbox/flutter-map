@@ -29,7 +29,7 @@ class _PartnerMainWidgetState extends State<PartnerMainWidget> {
             success: (data) => PartnerSlidingPanelWidget(),
             loading: () => Align(
                     child: Text(
-                  "Collecting Data...",
+                  "Loading...",
                   style: TextStyle(
                     fontSize: 17.0,
                     color: Colors.blue,
