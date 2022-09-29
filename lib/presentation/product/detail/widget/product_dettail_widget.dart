@@ -34,7 +34,7 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
   double? _heightIconBackArrow;
   List<Widget> _widgets = [];
   TextEditingController _controller = TextEditingController();
-
+  bool _favourite = false;
   @override
   void initState() {
     WidgetsBinding.instance.addObserver(this);
@@ -257,15 +257,22 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
           color: Colors.white,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Expanded(
-              flex: 1,
-              child: Icon(
-                Icons.favorite_outline_outlined,
-                //color: Colors.pink,
-                size: 24.0,
+              child: GestureDetector(
+                onTap: () {
+                  setState(() {
+                    _favourite = !_favourite;
+                  });
+                },
+                child: Icon(
+                  _favourite == false
+                      ? Icons.favorite_outline_outlined
+                      : Icons.favorite,
+                  color: _favourite == true ? Colors.pink : null,
+                  size: 30.0,
+                ),
               ),
             ),
             Expanded(
-              flex: 1,
               child: Icon(
                 Icons.shopping_cart_outlined,
                 //color: Colors.pink,
