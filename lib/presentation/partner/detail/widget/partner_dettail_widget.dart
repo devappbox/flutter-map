@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_map/presentation/product/detail/screen/product_dettail_screen.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -256,7 +257,6 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                       PRODUCT_FAKE_DATA_00001[index]["stock"].toString());
 
                   final disc = PRODUCT_FAKE_DATA_00001[index]["disc"];
-                  debugPrint("$disc $name");
                   double price1 = 0;
                   if (disc != null) {
                     int d = int.parse(
@@ -270,11 +270,12 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                     children: [
                       GestureDetector(
                         onTap: () {
+                          debugPrint("OKKKKKKKKKKKK");
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => PartnerDetaiScreen(
-                                      partner: widget.partner,
+                                builder: (context) => ProductDetaiScreen(
+                                      index: index,
                                     )),
                           );
                         },
@@ -288,7 +289,17 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                               children: [
                                 Flexible(
                                   child: GestureDetector(
-                                    onTap: () async {},
+                                    onTap: () {
+                                      debugPrint("OKKKKKKKKKKKK");
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductDetaiScreen(
+                                                  index: index,
+                                                )),
+                                      );
+                                    },
                                     child: Column(
                                       mainAxisSize: MainAxisSize.min,
                                       crossAxisAlignment:
