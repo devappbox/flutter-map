@@ -1,10 +1,10 @@
 import 'package:uuid/uuid.dart';
 
 // ignore: non_constant_identifier_names
-final PRODUCT_FAKE_DATA__00002 = [
+final PRODUCT_FAKE_DATA_00008 = [
   {
-    "id": "00002-W233B",
-    "partnerId": "00002",
+    "id": "00008-W233B",
+    "partnerId": "00008",
     "itemId": "W233B",
     "category": "REGULAR STOVE",
     "name": "W-233",
@@ -26,8 +26,8 @@ final PRODUCT_FAKE_DATA__00002 = [
     }
   },
   {
-    "id": "00002-W188",
-    "partnerId": "00002",
+    "id": "00008-W188",
+    "partnerId": "00008",
     "itemId": "W188",
     "category": "REGULAR STOVE",
     "name": "GAS STOVE W-188",
@@ -49,8 +49,8 @@ final PRODUCT_FAKE_DATA__00002 = [
     }
   },
   {
-    "id": "00002-RC50A",
-    "partnerId": "00002",
+    "id": "00008-RC50A",
+    "partnerId": "00008",
     "itemId": "RC50A",
     "category": "OVERVIEW",
     "name": "WINN GAS RICE COOKER RC-50 A",
@@ -76,8 +76,8 @@ final PRODUCT_FAKE_DATA__00002 = [
     }
   },
   {
-    "id": "00002-W5090A",
-    "partnerId": "00002",
+    "id": "00008-W5090A",
+    "partnerId": "00008",
     "itemId": "W5090A",
     "category": "Free Standing",
     "name": "WINN GAS KOMPOR FREESTANDING + OVEN GRILL W5090A",
@@ -101,8 +101,8 @@ final PRODUCT_FAKE_DATA__00002 = [
     }
   },
   {
-    "id": "00002-WGBH108P",
-    "partnerId": "00002",
+    "id": "00008-WGBH108P",
+    "partnerId": "00008",
     "itemId": "WGBH108P",
     "category": "BLENDER",
     "name": "WINN GAS BLENDER WGBH - 108P GREEN",
@@ -126,8 +126,8 @@ final PRODUCT_FAKE_DATA__00002 = [
     }
   },
   {
-    "id": "00002-W2WS",
-    "partnerId": "00002",
+    "id": "00008-W2WS",
+    "partnerId": "00008",
     "itemId": "W2WS",
     "category": "PORTABLE GRILL",
     "name": "WINN GAS PORTABLE GRILL GAS STOVE W2WS",

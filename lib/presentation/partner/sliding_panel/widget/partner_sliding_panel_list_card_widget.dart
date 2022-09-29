@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/domain/partner/entity/partner.dart';
+import 'package:flutter_map/presentation/partner/detail/screen/partner_dettail_screen.dart';
 import 'package:flutter_map/presentation/partner/sliding_panel/bloc/partner_sliding_panel_bloc.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:scroll_to_index/scroll_to_index.dart';
@@ -70,6 +71,7 @@ class _PartnerSlidingPanelListCardState
   Widget build(BuildContext context) {
     final me = -6.1651366269863335;
     final me1 = 106.87359415250097;
+    final mq = MediaQuery.of(context);
 
     double distanceInMeters = Geolocator.distanceBetween(
                 me, me1, widget.partner.latitude, widget.partner.longitude)
@@ -161,108 +163,180 @@ class _PartnerSlidingPanelListCardState
                 SizedBox(
                   height: 5.0,
                 ),
-                Text(
-                  widget.partner.address,
-                  style: TextStyle(fontSize: 13.0, color: Colors.black),
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Wrap(
+                Row(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(
-                      "Distance",
-                      style: TextStyle(fontSize: 13.0, color: Colors.black),
+                    Align(
+                      child: Card(
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8)),
+                        child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12.0),
+                            child: Image.asset(
+                              "assets/images/partners/merchant.jpg",
+                              gaplessPlayback: true,
+                              fit: BoxFit.fill,
+                              width: mq.size.width / 4,
+                              height: mq.size.width / 4,
+                            )),
+                      ),
                     ),
-                    Text(
-                      " $distanceInMeters Km",
-                      style: TextStyle(fontSize: 13.0, color: Colors.blue),
+                    const SizedBox(
+                      width: 10.0,
                     ),
-                  ],
-                ),
-                SizedBox(
-                  height: 5.0,
-                ),
-                Text(
-                  widget.partner.phoneNumber,
-                  style: TextStyle(fontSize: 13.0, color: Colors.blue),
-                ),
-                SizedBox(
-                  height: 0.0,
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(right: 20.0),
-                  child: Row(
-                    children: [
-                      Column(
+                    Expanded(
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Wrap(
-                            children: [
-                              Text(
-                                "Open",
-                                style: TextStyle(
-                                    fontSize: 13.0,
-                                    color: Color.fromARGB(255, 33, 243, 121)),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Text(
-                                "-",
-                                style: TextStyle(
-                                    fontSize: 13.0, color: Colors.black),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Text(
-                                "Close",
-                                style: TextStyle(
-                                    fontSize: 13.0, color: Colors.black),
-                              ),
-                            ],
+                          Text(
+                            widget.partner.address,
+                            style:
+                                TextStyle(fontSize: 13.0, color: Colors.black),
+                          ),
+                          SizedBox(
+                            height: 5.0,
                           ),
                           Wrap(
                             children: [
                               Text(
-                                widget.partner.openAt,
+                                "Distance",
                                 style: TextStyle(
                                     fontSize: 13.0, color: Colors.black),
-                              ),
-                              SizedBox(
-                                width: 10.0,
                               ),
                               Text(
-                                "-",
+                                " $distanceInMeters Km",
                                 style: TextStyle(
-                                    fontSize: 13.0, color: Colors.black),
-                              ),
-                              SizedBox(
-                                width: 10.0,
-                              ),
-                              Text(
-                                widget.partner.closeAt,
-                                style: TextStyle(
-                                    fontSize: 13.0, color: Colors.black),
+                                    fontSize: 13.0, color: Colors.blue),
                               ),
                             ],
+                          ),
+                          SizedBox(
+                            height: 5.0,
+                          ),
+                          Text(
+                            widget.partner.phoneNumber,
+                            style:
+                                TextStyle(fontSize: 13.0, color: Colors.blue),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(right: 20.0),
+                            child: Row(
+                              children: [
+                                Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Wrap(
+                                      children: [
+                                        Text(
+                                          "Open",
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Color.fromARGB(
+                                                  255, 33, 243, 121)),
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          "-",
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Colors.black),
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          "Close",
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                    Wrap(
+                                      children: [
+                                        Text(
+                                          widget.partner.openAt,
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Colors.black),
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          "-",
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Colors.black),
+                                        ),
+                                        SizedBox(
+                                          width: 10.0,
+                                        ),
+                                        Text(
+                                          widget.partner.closeAt,
+                                          style: TextStyle(
+                                              fontSize: 13.0,
+                                              color: Colors.black),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                                //Spacer(),
+                                SizedBox(
+                                  width: 15.0,
+                                ),
+                                Expanded(
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                PartnerDetaiScreen(
+                                                  partner: widget.partner,
+                                                )),
+                                      );
+                                    },
+                                    child: Container(
+                                      width: 50,
+                                      height: 30,
+                                      decoration: BoxDecoration(
+                                        color: Colors.lightGreen,
+                                        borderRadius: BorderRadius.circular(3),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: Color.fromARGB(
+                                                      255, 247, 250, 252)
+                                                  .withOpacity(0.5),
+                                              offset: const Offset(0, 25),
+                                              blurRadius: 3,
+                                              spreadRadius: -10)
+                                        ],
+                                      ),
+                                      child: const Center(
+                                        child: Text(
+                                          'Detail',
+                                          style: TextStyle(
+                                            fontSize: 12.0,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                         ],
                       ),
-                      Spacer(),
-                      ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            fixedSize: const Size(100, 30),
-                            shape: new RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(10.0),
-                            ),
-                            textStyle: const TextStyle(fontSize: 15.0)),
-                        onPressed: () {},
-                        child: const Text('Detail'),
-                      ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
                 SizedBox(
                   height: 10.0,

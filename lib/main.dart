@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_map/di/injection.dart';
+import 'package:flutter_map/presentation/cart/cubit/cart_cubit.dart';
 import 'package:flutter_map/presentation/common/colors.dart';
 import 'package:flutter_map/presentation/partner/list/bloc/partner_list_bloc.dart';
 import 'package:flutter_map/presentation/partner/list/cubit/partner_list_cubit.dart';
@@ -24,6 +25,7 @@ void main() async {
         create: (context) => getIt<PartnerListBloc>(),
         lazy: false,
       ),
+      BlocProvider(create: (context) => getIt<CartCubit>()),
     ],
     child: const MyApp(),
   ));
