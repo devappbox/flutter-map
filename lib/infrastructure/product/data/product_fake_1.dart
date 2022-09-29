@@ -10,7 +10,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "name": "W-233",
     "color": "BLUE",
     "price": 398000,
-    "discPrice": 5,
+    "disc": 5,
     "stock": 15,
     "photo": "jpg",
     "description": {
@@ -32,7 +32,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "category": "REGULAR STOVE",
     "name": "GAS STOVE W-188",
     "price": 204000,
-    "discPrice": 5,
+    "disc": null,
     "stock": 6,
     "photo": "jpg",
     "description": {
@@ -55,7 +55,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "category": "OVERVIEW",
     "name": "WINN GAS RICE COOKER RC-50 A",
     "price": 3348000,
-    "discPrice": null,
+    "disc": null,
     "stock": 10,
     "photo": "jpg",
     "description": {
@@ -82,7 +82,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "category": "Free Standing",
     "name": "WINN GAS KOMPOR FREESTANDING + OVEN GRILL W5090A",
     "price": 4350000,
-    "discPrice": null,
+    "disc": null,
     "stock": 15,
     "photo": "jpg",
     "description": {
@@ -107,7 +107,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "category": "BLENDER",
     "name": "WINN GAS BLENDER WGBH - 108P GREEN",
     "price": 311000,
-    "discPrice": null,
+    "disc": 7,
     "stock": 20,
     "photo": "jpg",
     "description": {
@@ -132,7 +132,7 @@ final PRODUCT_FAKE_DATA_00001 = [
     "category": "PORTABLE GRILL",
     "name": "WINN GAS PORTABLE GRILL GAS STOVE W2WS",
     "price": 940000,
-    "discPrice": null,
+    "disc": null,
     "stock": 5,
     "photo": "jpg",
     "description": {

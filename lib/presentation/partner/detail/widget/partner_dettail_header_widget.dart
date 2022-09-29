@@ -88,7 +88,7 @@ class _PartnerdetailHeaderWidgetState extends State<PartnerdetailHeaderWidget> {
                   Expanded(
                     child: Text(
                       widget.partner.name,
-                      style: TextStyle(fontSize: 20.0, color: Colors.blue),
+                      style: TextStyle(fontSize: 17.0, color: Colors.blue),
                     ),
                   ),
                   //Spacer(),

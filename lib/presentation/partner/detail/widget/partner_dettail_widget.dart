@@ -226,9 +226,12 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
             ),
             SliverToBoxAdapter(
               child: Container(
-                padding: EdgeInsets.only(right: 10.0, left: 10.0),
+                padding: EdgeInsets.only(left: 15.0),
                 //height: 1000,
-                child: Text("Produk Yang Ada Di Toko"),
+                child: Text(
+                  "Produk Yang Ada Di Toko",
+                  style: TextStyle(fontSize: 16),
+                ),
               ),
             ),
             SliverToBoxAdapter(
@@ -249,153 +252,256 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                   int price = int.parse(
                       PRODUCT_FAKE_DATA_00001[index]["price"].toString());
 
+                  int stock = int.parse(
+                      PRODUCT_FAKE_DATA_00001[index]["stock"].toString());
+
+                  final disc = PRODUCT_FAKE_DATA_00001[index]["disc"];
+                  debugPrint("$disc $name");
+                  double price1 = 0;
+                  if (disc != null) {
+                    int d = int.parse(
+                        PRODUCT_FAKE_DATA_00001[index]["disc"].toString());
+                    price1 = price - ((d / 100) * price);
+                  }
+
                   // debugPrint(
                   //     "POS CATALOG LIST WIDGET VVVV ${state.items![index].id} ${state.items![index].name}");
-                  return Card(
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 10.0, bottom: 20.0),
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Flexible(
-                            child: GestureDetector(
-                              onTap: () async {},
-                              child: Column(
-                                mainAxisSize: MainAxisSize.min,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Align(
-                                    child: Card(
-                                      shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8)),
-                                      child: ClipRRect(
-                                          borderRadius:
-                                              BorderRadius.circular(12.0),
-                                          child: Align(
-                                            child: Image.asset(
-                                              "assets/images/products/$photo",
-                                              gaplessPlayback: true,
-                                              fit: BoxFit.fill,
-                                              height: exp1,
+                  return Stack(
+                    children: [
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PartnerDetaiScreen(
+                                      partner: widget.partner,
+                                    )),
+                          );
+                        },
+                        child: Card(
+                          child: Padding(
+                            padding:
+                                const EdgeInsets.only(top: 10.0, bottom: 20.0),
+                            child: Column(
+                              mainAxisSize: MainAxisSize.min,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: GestureDetector(
+                                    onTap: () async {},
+                                    child: Column(
+                                      mainAxisSize: MainAxisSize.min,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Align(
+                                          child: Card(
+                                            shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(8)),
+                                            child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(12.0),
+                                                child: Align(
+                                                  child: Image.asset(
+                                                    "assets/images/products/$photo",
+                                                    gaplessPlayback: true,
+                                                    fit: BoxFit.fill,
+                                                    height: exp1,
 
-                                              // mq.orientation == Orientation.portrait
-                                              //     ? mq.size.width / 2.5
-                                              //     : mq.size.width / 4.5,
-                                              // width: mq.size.width / 2.1,
+                                                    // mq.orientation == Orientation.portrait
+                                                    //     ? mq.size.width / 2.5
+                                                    //     : mq.size.width / 4.5,
+                                                    // width: mq.size.width / 2.1,
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Flexible(
+                                          child: Padding(
+                                            padding: const EdgeInsets.only(
+                                                left: 8.0),
+                                            child: Column(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  name,
+                                                  style: const TextStyle(
+                                                      color: Colors.blue,
+                                                      fontSize: 13.0),
+                                                ),
+                                                const SizedBox(
+                                                  height: 10.0,
+                                                ),
+
+                                                Wrap(children: [
+                                                  const Text("Stok ",
+                                                      style: TextStyle(
+                                                          height: 1.2)),
+                                                  Text("$stock",
+                                                      style: const TextStyle(
+                                                          color: Colors.blue,
+                                                          height: 1.2))
+                                                ]),
+
+                                                Text(
+                                                    NumberFormat.currency(
+                                                            locale: 'id',
+                                                            symbol: 'Rp ',
+                                                            decimalDigits: 0)
+                                                        .format(price),
+                                                    style: TextStyle(
+                                                        decoration: disc != null
+                                                            ? TextDecoration
+                                                                .lineThrough
+                                                            : TextDecoration
+                                                                .none,
+                                                        color: disc == null
+                                                            ? Colors.blue
+                                                            : Colors.black38)),
+                                                disc != null
+                                                    ? Wrap(children: [
+                                                        const Text("Disc ",
+                                                            style: TextStyle(
+                                                                height: 1.2)),
+                                                        Text("$disc%",
+                                                            style:
+                                                                const TextStyle(
+                                                                    color: Colors
+                                                                        .blue,
+                                                                    height:
+                                                                        1.2))
+                                                      ])
+                                                    : Container(),
+                                                disc != null
+                                                    ? Text(
+                                                        NumberFormat.currency(
+                                                                locale: 'id',
+                                                                symbol: 'Rp ',
+                                                                decimalDigits:
+                                                                    0)
+                                                            .format(price1),
+                                                        style: TextStyle(
+                                                            color: Colors.blue))
+                                                    : Container()
+
+                                                // Wrap(
+                                                //   children: [
+                                                //     Wrap(
+                                                //       children: [
+                                                //         const Text("Disc ",
+                                                //             style: TextStyle(
+                                                //                 decoration: TextDecoration.underline,
+                                                //                 height: 1.2)),
+                                                //         (widget.item.sellDisc ?? 0)
+                                                //                         .toString()
+                                                //                         .split('.')[1]
+                                                //                         .length ==
+                                                //                     1 &&
+                                                //                 (widget.item.sellDisc ?? 0)
+                                                //                         .toString()
+                                                //                         .split('.')[1] ==
+                                                //                     '0'
+                                                //             ? Text(
+                                                //                 "${(widget.item.sellDisc ?? 0).toString().split('.')[0]}%",
+                                                //                 style: const TextStyle(
+                                                //                     color: Colors.blue, height: 1.2))
+                                                //             : Text("${widget.item.sellDisc ?? 0}%",
+                                                //                 style: const TextStyle(
+                                                //                     color: Colors.blue, height: 1.2)),
+                                                //       ],
+                                                //     ),
+                                                //     const SizedBox(
+                                                //       width: 10.0,
+                                                //     ),
+                                                //     const Text(
+                                                //       "|",
+                                                //       style: TextStyle(height: 1.2),
+                                                //     ),
+                                                //     const SizedBox(
+                                                //       width: 10.0,
+                                                //     ),
+                                                //     Wrap(children: [
+                                                //       const Text("Stok ",
+                                                //           style: TextStyle(
+                                                //               decoration: TextDecoration.underline,
+                                                //               height: 1.2)),
+                                                //       ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
+                                                //                       .toString()
+                                                //                       .split('.')[1]
+                                                //                       .length ==
+                                                //                   1 &&
+                                                //               ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
+                                                //                       .toString()
+                                                //                       .split('.')[1] ==
+                                                //                   '0'
+                                                //           ? Text(
+                                                //               ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
+                                                //                   .toString()
+                                                //                   .split('.')[0],
+                                                //               style: const TextStyle(
+                                                //                   decoration: TextDecoration.underline,
+                                                //                   height: 1.2,
+                                                //                   color: Colors.blue))
+                                                //           : Text(
+                                                //               "${(widget.item.stock ?? 0) - (pos?.qty ?? 0)}",
+                                                //               style: const TextStyle(
+                                                //                   decoration: TextDecoration.underline,
+                                                //                   height: 1.2,
+                                                //                   color: Colors.blue)),
+                                                //     ])
+                                                //   ],
+                                                // ),
+                                              ],
                                             ),
-                                          )),
+                                          ),
+                                        ),
+                                      ],
                                     ),
                                   ),
-                                  const SizedBox(height: 8),
-                                  Flexible(
-                                    child: Padding(
-                                      padding: const EdgeInsets.only(left: 8.0),
-                                      child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            name,
-                                            style: const TextStyle(
-                                                color: Colors.blue,
-                                                fontSize: 13.0),
-                                          ),
-                                          const SizedBox(
-                                            height: 0.0,
-                                          ),
-
-                                          Text(
-                                              NumberFormat.currency(
-                                                      locale: 'id',
-                                                      symbol: 'Rp ',
-                                                      decimalDigits: 0)
-                                                  .format(price),
-                                              style: const TextStyle(
-                                                  color: Colors.blue)),
-                                          // Wrap(
-                                          //   children: [
-                                          //     Wrap(
-                                          //       children: [
-                                          //         const Text("Disc ",
-                                          //             style: TextStyle(
-                                          //                 decoration: TextDecoration.underline,
-                                          //                 height: 1.2)),
-                                          //         (widget.item.sellDisc ?? 0)
-                                          //                         .toString()
-                                          //                         .split('.')[1]
-                                          //                         .length ==
-                                          //                     1 &&
-                                          //                 (widget.item.sellDisc ?? 0)
-                                          //                         .toString()
-                                          //                         .split('.')[1] ==
-                                          //                     '0'
-                                          //             ? Text(
-                                          //                 "${(widget.item.sellDisc ?? 0).toString().split('.')[0]}%",
-                                          //                 style: const TextStyle(
-                                          //                     color: Colors.blue, height: 1.2))
-                                          //             : Text("${widget.item.sellDisc ?? 0}%",
-                                          //                 style: const TextStyle(
-                                          //                     color: Colors.blue, height: 1.2)),
-                                          //       ],
-                                          //     ),
-                                          //     const SizedBox(
-                                          //       width: 10.0,
-                                          //     ),
-                                          //     const Text(
-                                          //       "|",
-                                          //       style: TextStyle(height: 1.2),
-                                          //     ),
-                                          //     const SizedBox(
-                                          //       width: 10.0,
-                                          //     ),
-                                          //     Wrap(children: [
-                                          //       const Text("Stok ",
-                                          //           style: TextStyle(
-                                          //               decoration: TextDecoration.underline,
-                                          //               height: 1.2)),
-                                          //       ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
-                                          //                       .toString()
-                                          //                       .split('.')[1]
-                                          //                       .length ==
-                                          //                   1 &&
-                                          //               ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
-                                          //                       .toString()
-                                          //                       .split('.')[1] ==
-                                          //                   '0'
-                                          //           ? Text(
-                                          //               ((widget.item.stock ?? 0) - (pos?.qty ?? 0))
-                                          //                   .toString()
-                                          //                   .split('.')[0],
-                                          //               style: const TextStyle(
-                                          //                   decoration: TextDecoration.underline,
-                                          //                   height: 1.2,
-                                          //                   color: Colors.blue))
-                                          //           : Text(
-                                          //               "${(widget.item.stock ?? 0) - (pos?.qty ?? 0)}",
-                                          //               style: const TextStyle(
-                                          //                   decoration: TextDecoration.underline,
-                                          //                   height: 1.2,
-                                          //                   color: Colors.blue)),
-                                          //     ])
-                                          //   ],
-                                          // ),
-                                        ],
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
+                                ),
+                                const SizedBox(height: 20),
+                                // PosCatalogListCardButtonWidget(
+                                //   item: widget.item,
+                                // )
+                              ],
                             ),
                           ),
-                          const SizedBox(height: 20),
-                          // PosCatalogListCardButtonWidget(
-                          //   item: widget.item,
-                          // )
-                        ],
+                        ),
                       ),
-                    ),
+                      disc != null
+                          ? Positioned(
+                              top: 15,
+                              right: 15,
+                              child: Container(
+                                width: 50,
+                                height: 20,
+                                decoration: BoxDecoration(
+                                  color: Color.fromARGB(255, 195, 74, 98),
+                                  borderRadius: BorderRadius.circular(50),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: Colors.blue.withOpacity(0.5),
+                                        offset: const Offset(0, 25),
+                                        blurRadius: 3,
+                                        spreadRadius: -10)
+                                  ],
+                                ),
+                                child: Center(
+                                  child: Text(
+                                    'Disc $disc%',
+                                    style: TextStyle(
+                                      fontSize: 10.0,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            )
+                          : Container()
+                    ],
                   );
                 },
                 mainAxisSpacing: 3.0,
@@ -403,12 +509,7 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
               ),
             ),
             SliverToBoxAdapter(
-              child: Container(
-                height: 1000,
-                child: Center(
-                  child: Text("data"),
-                ),
-              ),
+              child: SizedBox(height: 10),
             ),
           ],
         ));
