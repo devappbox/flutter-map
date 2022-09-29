@@ -34,10 +34,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int? v = 5;
-
-    String c = v.toString();
-
     return MaterialApp(
         title: 'Shops',
         theme: ThemeData(

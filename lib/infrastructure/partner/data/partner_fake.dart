@@ -3,7 +3,7 @@ import 'package:uuid/uuid.dart';
 // ignore: non_constant_identifier_names
 final PARTNER_FAKE_DATA = [
   {
-    "id": Uuid().v4(),
+    "id": "00001",
     "name": "Toko Lancar Sentosa",
     "address": "Jl. Utan Panjang 3, RW.7 Kemayoran",
     "phoneNumber": "+6282135773334",
@@ -14,7 +14,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00002",
     "name": "Toko B",
     "address": "Jl. Moh. Saari 2-9 RT.1/RW.9, Sunter Jaya, Jakarta Utara",
     "phoneNumber": "+6282135773334",
@@ -25,7 +25,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00003",
     "name": "Toko C",
     "address":
         "Jl. Berlian I 6-10 RW.4, Sumur Batu, Kec. Kemayoran Jakarta Pusat",
@@ -37,7 +37,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00004",
     "name": "Toko D",
     "address":
         "Jl. Cempaka Baru IV RW.7, Cempaka Baru, Kemayoran Jakarta Pusat",
@@ -49,7 +49,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00005",
     "name": "Toko E",
     "address": "Jl. cempaka Putih tengah VI RW.7, East Cempaka Putih",
     "phoneNumber": "+6282135773334",
@@ -60,7 +60,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00006",
     "name": "Toko F",
     "address": "Jl. Boulevard Raya ABC No. xxx Jakarta Utara",
     "phoneNumber": "+6282135773334",
@@ -71,7 +71,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00007",
     "name": "Toko G",
     "address":
         "Jl. Trampil IV 6-8 RT.10/RW.2, Klp. Gading Barat. Jakarta Utara",
@@ -83,7 +83,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00008",
     "name": "Toko H",
     "address": "Jl. Pulau Panjang RT.2/RW.9, Klp. Gading Barat Jakarta Utara",
     "phoneNumber": "+6282135773334",
@@ -94,7 +94,7 @@ final PARTNER_FAKE_DATA = [
     "closeAt": "17.00"
   },
   {
-    "id": Uuid().v4(),
+    "id": "00009",
     "name": "Toko I",
     "address": "Jl. Pulo Besar I 8-10 RT.3/RW.11, Sunter Jaya, Jakarta Utara",
     "phoneNumber": "+6282135773334",

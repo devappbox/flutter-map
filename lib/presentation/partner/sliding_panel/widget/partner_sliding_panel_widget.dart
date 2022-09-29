@@ -80,12 +80,15 @@ class _PartnerSlidingPanelWidgetState extends State<PartnerSlidingPanelWidget> {
           _height = 700.0;
           _width = 350.0;
           _expanded = true;
-          _routeLocal = true;
-          ModalRoute.of(context)
-              ?.addLocalHistoryEntry(LocalHistoryEntry(onRemove: () {
-            _routeLocal = false;
-            _panelController.close();
-          }));
+
+          if (_routeLocal == false) {
+            _routeLocal = true;
+            ModalRoute.of(context)
+                ?.addLocalHistoryEntry(LocalHistoryEntry(onRemove: () {
+              _routeLocal = false;
+              _panelController.close();
+            }));
+          }
         }),
         // context
         //     .read<PartnerSlidingPanelBloc>()
