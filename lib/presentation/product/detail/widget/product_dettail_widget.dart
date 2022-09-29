@@ -33,6 +33,7 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
   double? _heightStatusBar;
   double? _heightIconBackArrow;
   List<Widget> _widgets = [];
+  TextEditingController _controller = TextEditingController();
 
   @override
   void initState() {
@@ -50,6 +51,7 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
   @override
   void dispose() {
     WidgetsBinding.instance.removeObserver(this);
+    _controller.dispose();
     super.dispose();
   }
 
@@ -255,39 +257,19 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
           color: Colors.white,
           child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
             Expanded(
-              flex: 3,
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Row(
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(59, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          primary: AppColors.itemCardBuyButtonColor,
-                        ),
-                        onPressed: () async {},
-                        child: const Text(
-                          "B e l i",
-                          style: TextStyle(fontSize: 17.0),
-                        )),
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          minimumSize: const Size(59, 50),
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          primary: AppColors.itemCardBuyButtonColor,
-                        ),
-                        onPressed: () async {},
-                        child: const Text(
-                          "B e l i",
-                          style: TextStyle(fontSize: 17.0),
-                        )),
-                  ],
-                ),
+              flex: 1,
+              child: Icon(
+                Icons.favorite_outline_outlined,
+                //color: Colors.pink,
+                size: 24.0,
+              ),
+            ),
+            Expanded(
+              flex: 1,
+              child: Icon(
+                Icons.shopping_cart_outlined,
+                //color: Colors.pink,
+                size: 30.0,
               ),
             ),
             Expanded(
@@ -302,7 +284,184 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
                       ),
                       primary: AppColors.itemCardBuyButtonColor,
                     ),
-                    onPressed: () async {},
+                    onPressed: () async {
+                      _controller.text = "1";
+                      showModalBottomSheet(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20.0),
+                          ),
+                          context: context,
+                          isScrollControlled: true, // Important
+                          builder: (context) {
+                            return Container(
+                              padding: EdgeInsets.only(
+                                bottom:
+                                    MediaQuery.of(context).viewInsets.bottom,
+                              ),
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min, // Important
+                                children: [
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Row(
+                                    children: [
+                                      Image.asset(
+                                        "assets/images/products/" +
+                                            PRODUCT_FAKE_DATA_00001[
+                                                    widget.index]["itemId"]
+                                                .toString() +
+                                            ".jpg",
+                                        width: 150,
+                                        height: 150,
+                                        fit: BoxFit.fill,
+                                      ),
+                                      SizedBox(
+                                        width: 20,
+                                      ),
+                                      Expanded(
+                                        child: Text(
+                                          PRODUCT_FAKE_DATA_00001[widget.index]
+                                                  ["name"]
+                                              .toString(),
+                                          key: const Key('product_detail'),
+                                          style: const TextStyle(
+                                              fontSize: 15,
+                                              color: Colors.black),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  SizedBox(
+                                    height: 20,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(15.0),
+                                    child: Row(
+                                      children: [
+                                        Expanded(
+                                          child: SizedBox(
+                                            width: 30.0,
+                                            height: 30.0,
+                                            child: const Text(
+                                              "Jumlah",
+                                              style: TextStyle(fontSize: 15.0),
+                                            ),
+                                          ),
+                                        ),
+                                        Spacer(),
+                                        Expanded(
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScopeNode
+                                                        currentFocus =
+                                                        FocusScope.of(context);
+
+                                                    if (!currentFocus
+                                                        .hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                    if (int.parse(_controller
+                                                                .text) >
+                                                            1 &&
+                                                        _controller.text !=
+                                                            "") {
+                                                      _controller.text =
+                                                          (int.parse(_controller
+                                                                      .text) -
+                                                                  1)
+                                                              .toString();
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.remove,
+                                                    //color: Colors.pink,
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: SizedBox(
+                                                  width: 30.0,
+                                                  height: 50.0,
+                                                  child: TextField(
+                                                    keyboardType:
+                                                        TextInputType.number,
+                                                    controller: _controller,
+                                                    // obscureText: true,
+                                                    decoration: InputDecoration(
+                                                      border:
+                                                          OutlineInputBorder(),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: GestureDetector(
+                                                  onTap: () {
+                                                    FocusScopeNode
+                                                        currentFocus =
+                                                        FocusScope.of(context);
+
+                                                    if (!currentFocus
+                                                        .hasPrimaryFocus) {
+                                                      currentFocus.unfocus();
+                                                    }
+                                                    if (_controller.text !=
+                                                        "") {
+                                                      _controller.text =
+                                                          (int.parse(_controller
+                                                                      .text) +
+                                                                  1)
+                                                              .toString();
+                                                    } else {
+                                                      _controller.text = "1";
+                                                    }
+                                                  },
+                                                  child: Icon(
+                                                    Icons.add,
+                                                    //color: Colors.pink,
+                                                    size: 24.0,
+                                                  ),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 50,
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: ElevatedButton(
+                                        style: ElevatedButton.styleFrom(
+                                          minimumSize: Size(size.width, 50),
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(10.0),
+                                          ),
+                                          primary:
+                                              AppColors.itemCardBuyButtonColor,
+                                        ),
+                                        onPressed: () async {
+                                          Navigator.pop(context);
+                                        },
+                                        child: const Text(
+                                          "B e l i",
+                                          style: TextStyle(fontSize: 17.0),
+                                        )),
+                                  ),
+                                ],
+                              ),
+                            );
+                          });
+                    },
                     child: const Text(
                       "B e l i",
                       style: TextStyle(fontSize: 17.0),

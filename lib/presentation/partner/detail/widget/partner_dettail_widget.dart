@@ -269,16 +269,7 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                   return Stack(
                     children: [
                       GestureDetector(
-                        onTap: () {
-                          debugPrint("OKKKKKKKKKKKK");
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => ProductDetaiScreen(
-                                      index: index,
-                                    )),
-                          );
-                        },
+                        onTap: () {},
                         child: Card(
                           child: Padding(
                             padding:
@@ -290,7 +281,6 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                                 Flexible(
                                   child: GestureDetector(
                                     onTap: () {
-                                      debugPrint("OKKKKKKKKKKKK");
                                       Navigator.push(
                                         context,
                                         MaterialPageRoute(
@@ -473,7 +463,7 @@ class _PartnerDetaiWidgetState extends State<PartnerDetaiWidget>
                                     ),
                                   ),
                                 ),
-                                const SizedBox(height: 20),
+                                const SizedBox(height: 10),
                                 // PosCatalogListCardButtonWidget(
                                 //   item: widget.item,
                                 // )
