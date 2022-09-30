@@ -391,10 +391,12 @@ class _ProductDetaiWidgetState extends State<ProductDetaiWidget>
                                                 ),
                                               ),
                                               Expanded(
+                                                flex: 2,
                                                 child: SizedBox(
                                                   width: 30.0,
                                                   height: 50.0,
                                                   child: TextField(
+                                                    textAlign: TextAlign.center,
                                                     keyboardType:
                                                         TextInputType.number,
                                                     controller: _controller,
