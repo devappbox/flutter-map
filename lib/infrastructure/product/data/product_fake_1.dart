@@ -62,8 +62,7 @@ final PRODUCT_FAKE_DATA_00001 = [
       "STOWE SPECIFICATION": {
         "DIMENSION": "485x425 mm (D X T)",
         "WEIGHT": "16 Kg",
-        "IGNITER":
-            "Aluminium Alloy Pot, Tutup Stainless Steel, Body Berlapis Enamel Anti Karat. Karek Kaki, Knob ABS, Tungku Cor Berkualitas",
+        "IGNITER": "Automatic Piezo Electric",
         "MATERIAL":
             "Aluminium Alloy Pot, Tutup Stainless Steel, Body Berlapis Enamel Anti Karat. Karek Kaki, Knob ABS, Tungku Cor Berkualitas",
         "STOVE DIMENSION": "160mm",
